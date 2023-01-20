@@ -1,3 +1,4 @@
+from pathlib import Path
 import pytest
 
 import whosyouragent
@@ -37,6 +38,9 @@ def test_whosyouragent_update_all():
     assert all(ch.isnumeric() or ch == "." for ch in updater.edge)
     assert all(ch.isnumeric() or ch == "." for ch in updater.vivaldi)
     assert all(ch.isnumeric() or ch == "." for ch in updater.opera)
+    assert (
+        Path(__file__).parent.parent / "src" / "whosyouragent" / "browserVersions.json"
+    ).exists()
 
 
 def test_whosyouragent_get_agent():
