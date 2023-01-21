@@ -26,7 +26,8 @@
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">import os
+<pre><code class="python">import json
+import os
 import time
 from pathlib import Path
 
@@ -35,8 +36,8 @@ from .whosyouragent import VersionUpdater, get_agent
 browsers_path = Path(__file__).parent / &#34;browserVersions.json&#34;
 if (
     not browsers_path.exists()
-    or time.time() - os.stat(str(browsers_path)).st_mtime &gt; 604800
-):  # 1 week
+    or time.time() - os.stat(str(browsers_path)).st_mtime &gt; 604800  # 1 week
+):
     print(&#34;Updating whosyouragent browser versions...&#34;)
     updater = VersionUpdater()
     updater.update_all()</code></pre>
