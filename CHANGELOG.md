@@ -1,6 +1,13 @@
 # Changelog
 
-## 1.0.7 (2023-02-13)
+## 1.0.8 (2023-02-13)
+
+#### Fixes
+
+* fix creating browserVersions.json with {} instead of "{}" lol
+
+
+## v1.0.7 (2023-02-13)
 
 #### Fixes
 
@@ -8,6 +15,8 @@
 * remove unused import
 #### Others
 
+* build v1.0.7
+* update changelog
 * update changelog
 
 
