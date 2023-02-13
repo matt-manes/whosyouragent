@@ -100,12 +100,15 @@ class VersionUpdater:
             "OPR": self.opera,
             "Safari": self.safari,
         }
+        # Remove any keys that failed to update and keep previous version number
         for version in versions:
             if not ((versions[version]).replace(".", "")).isnumeric():
                 versions.pop(version)
                 raise ValueError(
                     f"Scraped result for {version} is incorrect: {versions[version]}"
                 )
+        previous_versions = json.loads(self.versions_path.read_text())
+        versions = previous_versions | versions
         self.versions_path.write_text(json.dumps(versions))
 
 
