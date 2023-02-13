@@ -12,4 +12,7 @@ if (
 ):
     print("Updating whosyouragent browser versions...")
     updater = VersionUpdater()
-    updater.update_all()
+    try:
+        updater.update_all()
+    except Exception as e:
+        print(e)
