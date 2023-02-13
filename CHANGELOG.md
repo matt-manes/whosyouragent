@@ -1,11 +1,23 @@
 # Changelog
 
-## 1.0.6 (2023-02-13)
+## 1.0.7 (2023-02-13)
 
 #### Fixes
 
-* fix chrome version updater
-* fix update failure handling
+* fix error occuring when browserVersions.json doesn't exist
+* remove unused import
+#### Others
+
+* update changelog
+
+
+## v1.0.6 (2023-02-13)
+
+#### Others
+
+* build v1.0.6
+* update changelog
+
 
 ## v1.0.5 (2023-02-13)
 
