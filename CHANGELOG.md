@@ -2,7 +2,10 @@
 
 ## 1.0.6 (2023-02-13)
 
+#### Fixes
 
+* fix chrome version updater
+* fix update failure handling
 
 ## v1.0.5 (2023-02-13)
 
