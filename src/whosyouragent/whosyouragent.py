@@ -102,6 +102,7 @@ class VersionUpdater:
         }
         for version in versions:
             if not ((versions[version]).replace(".", "")).isnumeric():
+                versions.pop(version)
                 raise ValueError(
                     f"Scraped result for {version} is incorrect: {versions[version]}"
                 )
