@@ -10,6 +10,8 @@ from bs4 import BeautifulSoup
 class VersionUpdater:
     def __init__(self):
         self.versions_path = Path(__file__).parent / "browserVersions.json"
+        if not self.versions_path.exists():
+            self.versions_path.write_text(json.dumps("{}"))
 
     def update_firefox(self):
         try:
@@ -104,9 +106,6 @@ class VersionUpdater:
         for version in versions:
             if not ((versions[version]).replace(".", "")).isnumeric():
                 versions.pop(version)
-                raise ValueError(
-                    f"Scraped result for {version} is incorrect: {versions[version]}"
-                )
         previous_versions = json.loads(self.versions_path.read_text())
         versions = previous_versions | versions
         self.versions_path.write_text(json.dumps(versions))
