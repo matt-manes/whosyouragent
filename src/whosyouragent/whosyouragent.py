@@ -11,7 +11,7 @@ class VersionUpdater:
     def __init__(self):
         self.versions_path = Path(__file__).parent / "browserVersions.json"
         if not self.versions_path.exists():
-            self.versions_path.write_text(json.dumps("{}"))
+            self.versions_path.write_text(json.dumps({}))
 
     def update_firefox(self):
         try:
