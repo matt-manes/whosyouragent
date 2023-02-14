@@ -103,9 +103,13 @@ class VersionUpdater:
             "Safari": self.safari,
         }
         # Remove any keys that failed to update and keep previous version number
-        for version in versions:
-            if not ((versions[version]).replace(".", "")).isnumeric():
-                versions.pop(version)
+        poppers = [
+            version
+            for version in versions
+            if not ((versions[version]).replace(".", "")).isnumeric()
+        ]
+        for popper in poppers:
+            versions.pop(popper)
         previous_versions = json.loads(self.versions_path.read_text())
         versions = previous_versions | versions
         self.versions_path.write_text(json.dumps(versions))
