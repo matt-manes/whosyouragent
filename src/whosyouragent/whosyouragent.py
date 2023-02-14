@@ -15,14 +15,10 @@ class VersionUpdater:
 
     def update_firefox(self):
         try:
-            url = "https://en.wikipedia.org/wiki/Firefox"
+            url = "https://www.mozilla.org/en-US/firefox/releases/"
             soup = BeautifulSoup(requests.get(url).text, "html.parser")
-            version = (
-                soup.find("table", class_="infobox-subbox")
-                .find("td", class_="infobox-data")
-                .text
-            )
-            version = version[: version.find("[")]
+            release_list = soup.find("ol", class_="c-release-list")
+            version = release_list.ol.li.a.text
             self.firefox = version
         except Exception as e:
             print(e)
