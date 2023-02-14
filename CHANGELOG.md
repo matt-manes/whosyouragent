@@ -1,10 +1,22 @@
 # Changelog
 
-## 1.0.8 (2023-02-13)
+## 1.0.9 (2023-02-14)
+
+#### Fixes
+
+* update firefox version updater
+* fix dict key removal during iteration
+
+
+## v1.0.8 (2023-02-13)
 
 #### Fixes
 
 * fix creating browserVersions.json with {} instead of "{}" lol
+#### Others
+
+* build v1.0.8
+* update changelog
 
 
 ## v1.0.7 (2023-02-13)
