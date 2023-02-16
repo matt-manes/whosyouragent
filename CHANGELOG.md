@@ -1,11 +1,22 @@
 # Changelog
 
-## 1.0.9 (2023-02-14)
+## 1.0.10 (2023-02-16)
+
+#### Fixes
+
+* update chrome version updater
+
+
+## v1.0.9 (2023-02-14)
 
 #### Fixes
 
 * update firefox version updater
 * fix dict key removal during iteration
+#### Others
+
+* build v1.0.9
+* update changelog
 
 
 ## v1.0.8 (2023-02-13)
