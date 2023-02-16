@@ -1,4 +1,6 @@
 from pathlib import Path
+import json
+import random
 
 import pytest
 
@@ -8,31 +10,31 @@ updater = whosyouragent.VersionUpdater()
 updater.update_all()
 
 
-def test_whosyouragent_update_firefox():
+def test__whosyouragent__update_firefox():
     assert all(ch.isnumeric() or ch == "." for ch in updater.firefox)
 
 
-def test_whosyouragent_update_chrome():
+def test__whosyouragent__update_chrome():
     assert all(ch.isnumeric() or ch == "." for ch in updater.chrome)
 
 
-def test_whosyouragent_update_safari():
+def test__whosyouragent__update_safari():
     assert all(ch.isnumeric() or ch == "." for ch in updater.safari)
 
 
-def test_whosyouragent_update_edge():
+def test__whosyouragent__update_edge():
     assert all(ch.isnumeric() or ch == "." for ch in updater.edge)
 
 
-def test_whosyouragent_update_vivaldi():
+def test__whosyouragent__update_vivaldi():
     assert all(ch.isnumeric() or ch == "." for ch in updater.vivaldi)
 
 
-def test_whosyouragent_update_opera():
+def test__whosyouragent__update_opera():
     assert all(ch.isnumeric() or ch == "." for ch in updater.opera)
 
 
-def test_whosyouragent_update_all():
+def test__whosyouragent__update_all():
     assert all(ch.isnumeric() or ch == "." for ch in updater.firefox)
     assert all(ch.isnumeric() or ch == "." for ch in updater.chrome)
     assert all(ch.isnumeric() or ch == "." for ch in updater.safari)
@@ -44,7 +46,31 @@ def test_whosyouragent_update_all():
     ).exists()
 
 
-def test_whosyouragent_get_agent():
+def test__whosyouragent__get_agent():
     agent = whosyouragent.get_agent()
     assert type(agent) == str
     assert agent.startswith("Mozilla/5.0 ")
+
+
+def test__whosyouragent__randomize_version_number():
+    versions = json.loads(
+        (
+            Path(__file__).parent.parent
+            / "src"
+            / "whosyouragent"
+            / "browserVersions.json"
+        ).read_text()
+    )
+
+    def checksum(version: str) -> int:
+        return sum(int(part) for part in version.split("."))
+
+    def get_random_browser() -> str:
+        return versions[random.choice(list(versions.keys()))]
+
+    for _ in range(10000):
+        original = get_random_browser()
+        original_sum = checksum(original)
+        new = whosyouragent.whosyouragent.randomize_version_number(original)
+        assert all(ch.isnumeric() or ch == "." for ch in new)
+        assert original_sum >= checksum(new)

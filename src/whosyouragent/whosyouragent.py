@@ -119,6 +119,16 @@ platforms = [
 ]
 
 
+def randomize_version_number(version: str) -> str:
+    """Randomize a version number so that it's in between
+    the previous major version and the current one."""
+    parts = [int(part) for part in version.split(".")]
+    parts[0] = random.randint(parts[0] - 1, parts[0])
+    for i, part in enumerate(parts[1:]):
+        parts[i + 1] = random.randint(0, part)
+    return ".".join(str(part) for part in parts)
+
+
 def get_agent() -> str:
     """Build and return a user agent string."""
     browsers = json.loads((Path(__file__).parent / "browserVersions.json").read_text())
