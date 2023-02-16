@@ -1,10 +1,22 @@
 # Changelog
 
-## 1.0.10 (2023-02-16)
+## 1.1.0 (2023-02-16)
+
+#### New Features
+
+* implement version randomization into get_agent()
+* add func to randomize version numbers
+
+
+## v1.0.10 (2023-02-16)
 
 #### Fixes
 
 * update chrome version updater
+#### Others
+
+* build v1.0.10
+* update changelog
 
 
 ## v1.0.9 (2023-02-14)
