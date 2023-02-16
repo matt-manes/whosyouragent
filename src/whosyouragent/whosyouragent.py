@@ -132,6 +132,8 @@ def randomize_version_number(version: str) -> str:
 def get_agent() -> str:
     """Build and return a user agent string."""
     browsers = json.loads((Path(__file__).parent / "browserVersions.json").read_text())
+    for browser in browsers:
+        browsers[browser] = randomize_version_number(browsers[browser])
     browser = random.choice(list(browsers.keys()))
     if browser == "Safari":
         platform = platforms[-1]
