@@ -1,9 +1,9 @@
-# whosyouragent
+# Whosyouragent
 Self updating package for generating random user agent strings.<br>
 Install with:
 <pre>pip install whosyouragent</pre>
 New browser versions will be checked for when the module is imported if it's been a week or more since the last update.<br>
-Usage:
+### Usage:
 <pre>
 from whosyouragent import get_agent
 print(get_agent())
