@@ -29,7 +29,9 @@ class VersionUpdater:
             url = "https://en.wikipedia.org/wiki/Google_Chrome"
             soup = BeautifulSoup(requests.get(url).text, "html.parser")
             info_boxes = soup.find_all("td", class_="infobox-data")
-            version = info_boxes[8].text[: info_boxes[8].text.find("[")]
+            version = info_boxes[8].text[
+                : min([info_boxes[8].text.find("["), info_boxes[8].text.find("/")])
+            ]
             self.chrome = version
         except Exception as e:
             print(e)
