@@ -50,6 +50,10 @@ def test__whosyouragent__get_agent():
     agent = whosyouragent.get_agent()
     assert type(agent) == str
     assert agent.startswith("Mozilla/5.0 ")
+    agent = whosyouragent.get_agent(as_dict=True)
+    assert type(agent) == dict
+    assert list(agent.keys()) == ["User-Agent"]
+    assert agent["User-Agent"].startswith("Mozilla/5.0 ")
 
 
 def test__whosyouragent__randomize_version_number():
