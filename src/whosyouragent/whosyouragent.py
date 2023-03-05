@@ -133,8 +133,12 @@ def randomize_version_number(version: str) -> str:
     return ".".join(str(part) for part in parts)
 
 
-def get_agent() -> str:
-    """Build and return a user agent string."""
+def get_agent(as_dict: bool = False) -> str:
+    """Build and return a user agent string.
+
+    :param as_dict: If True, return
+    {"User-Agent": useragent} instead of
+    just the useragent string."""
     browsers = json.loads((Path(__file__).parent / "browserVersions.json").read_text())
     for browser in browsers:
         browsers[browser] = randomize_version_number(browsers[browser])
@@ -157,4 +161,7 @@ def get_agent() -> str:
                 useragent += f' OPR/{browsers["OPR"]}'
             elif browser == "Vivaldi":
                 useragent += f' Vivaldi/{browsers["Vivaldi"]}'
-    return useragent
+    if as_dict:
+        return {"User-Agent": useragent}
+    else:
+        return useragent
