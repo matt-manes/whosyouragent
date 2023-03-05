@@ -1,12 +1,27 @@
 # Changelog
 
-## 1.1.1 (2023-02-23)
+## 1.2.0 (2023-03-05)
+
+#### New Features
+
+* add option to return dict from get_agent()
+#### Fixes
+
+* fix vivaldi updater
+#### Others
+
+* test as_dict param for get_agent()
+
+
+## v1.1.1 (2023-02-23)
 
 #### Fixes
 
 * update chrome updater
 #### Others
 
+* build v1.1.1
+* update changelog
 * update readme
 
 
