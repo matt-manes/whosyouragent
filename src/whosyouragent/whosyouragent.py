@@ -60,10 +60,12 @@ class VersionUpdater:
 
     def update_vivaldi(self):
         try:
-            url = "https://en.wikipedia.org/wiki/Vivaldi_(web_browser)"
+            url = "https://vivaldi.com/blog/"
             soup = BeautifulSoup(requests.get(url).text, "html.parser")
-            info_boxes = soup.find_all("td", class_="infobox-data")
-            version = info_boxes[5].text[: info_boxes[5].text.find(" ")]
+            text = soup.find("div", class_="download-vivaldi-sidebar").text
+            text = text.split(" - ")[1]
+            text = text.replace(" (", ".")
+            version = text[: text.find(")")]
             self.vivaldi = version
         except Exception as e:
             print(e)
