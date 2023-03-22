@@ -6,14 +6,9 @@ build-backend = "hatchling.build"
 name = "whosyouragent"
 authors = [{name='Matt Manes'}]
 description = "Self updating package for generating random user agent strings."
-version = "1.2.0"
+version = "1.2.1"
 requires-python = ">=3.6"
-dependencies = [
-
-	"requests~=2.28.1",
-	"bs4~=0.0.1",
-	"pytest~=7.2.1"
-]
+dependencies = ["requests", "bs4", "pytest"]
 readme = "README.md"
 keywords = [
     "useragent",
