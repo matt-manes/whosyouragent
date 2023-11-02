@@ -4,39 +4,26 @@ build-backend = "hatchling.build"
 
 [project]
 name = "whosyouragent"
-authors = [{name='Matt Manes'}]
 description = "Self updating package for generating random user agent strings."
-version = "1.2.1"
+version = "1.3.0"
 requires-python = ">=3.6"
 dependencies = ["requests", "bs4", "pytest"]
 readme = "README.md"
-keywords = [
-    "useragent",
-    "user-agent",
-    "webscraping",
-    "web-scraping"
-]
-classifiers = [
-    "Programming Language :: Python :: 3",
-    "License :: OSI Approved :: MIT License",
-    "Operating System :: OS Independent",
-]
+keywords = ["useragent", "user-agent", "webscraping", "web-scraping"]
+classifiers = ["Programming Language :: Python :: 3", "License :: OSI Approved :: MIT License", "Operating System :: OS Independent"]
+
+[[project.authors]]
+name = "Matt Manes"
 
 [project.urls]
-"Homepage" = "https://github.com/matt-manes/whosyouragent"
-"Documentation" = "https://github.com/matt-manes/whosyouragent/tree/main/docs"
+Homepage = "https://github.com/matt-manes/whosyouragent"
+Documentation = "https://github.com/matt-manes/whosyouragent/tree/main/docs"
 "Source code" = "https://github.com/matt-manes/whosyouragent/tree/main/src/whosyouragent"
 
+[tool]
 [tool.pytest.ini_options]
-addopts = [
-    "--import-mode=importlib",
-]
+addopts = ["--import-mode=importlib"]
 pythonpath = "src"
 
 [tool.hatch.build.targets.sdist]
-exclude = [
-    ".coverage",
-    ".pytest_cache",
-    ".vscode",
-    "tests"
-]
+exclude = [".coverage", ".pytest_cache", ".vscode", "tests"]

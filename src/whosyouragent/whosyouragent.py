@@ -166,7 +166,8 @@ def get_agent(as_dict: bool = False) -> str:
     else:
         return useragent
 
-def get_header()->dict[str,str]:
-    """ Returns a dictionary `{'User-Agent': <random user agent string>}` for convenience.
+
+def get_header() -> dict[str, str]:
+    """Returns a dictionary `{'User-Agent': <random user agent string>}` for convenience.
     >>> response = requests.get(url, headers=get_header())"""
     return {"User-Agent": get_agent()}
