@@ -1,5 +1,11 @@
 # Changelog
 
+## v1.3.0 (2023-11-02)
+
+#### New Features
+
+* add get_header()
+
 ## v1.2.0 (2023-03-05)
 
 #### New Features
