@@ -78,3 +78,10 @@ def test__whosyouragent__randomize_version_number():
         new = whosyouragent.whosyouragent.randomize_version_number(original)
         assert all(ch.isnumeric() or ch == "." for ch in new)
         assert original_sum >= checksum(new)
+
+def test__get_header():
+    headers = whosyouragent.whosyouragent.get_header()
+    assert isinstance(headers, dict)
+    assert "User-Agent" in headers
+    assert isinstance(headers["User-Agent"], str)
+    assert headers["User-Agent"] != ""

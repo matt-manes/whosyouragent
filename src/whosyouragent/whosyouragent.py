@@ -136,9 +136,9 @@ def randomize_version_number(version: str) -> str:
 def get_agent(as_dict: bool = False) -> str:
     """Build and return a user agent string.
 
-    :param as_dict: If True, return
-    {"User-Agent": useragent} instead of
-    just the useragent string."""
+    :param as_dict: If True, return {"User-Agent": useragent} instead of just the useragent string.
+    Note: Leaving this parameter in place to maintain backwards compatibility,
+    but it's advised to use the `get_header()` function instead."""
     browsers = json.loads((Path(__file__).parent / "browserVersions.json").read_text())
     for browser in browsers:
         browsers[browser] = randomize_version_number(browsers[browser])
@@ -165,3 +165,8 @@ def get_agent(as_dict: bool = False) -> str:
         return {"User-Agent": useragent}
     else:
         return useragent
+
+def get_header()->dict[str,str]:
+    """ Returns a dictionary `{'User-Agent': <random user agent string>}` for convenience.
+    >>> response = requests.get(url, headers=get_header())"""
+    return {"User-Agent": get_agent()}
