@@ -14,11 +14,11 @@ class VersionUpdater:
             self.versions_path.write_text(
                 json.dumps(
                     {
-                        "Firefox": "118.0.1",
+                        "Firefox": "119.0.1",
                         "Chrome": "109.0.5414.165",
-                        "Edg": "118.0.2088.76",
-                        "Vivaldi": "6.4.3160.41",
-                        "OPR": "104.0.4944.36",
+                        "Edg": "119.0.2151.58",
+                        "Vivaldi": "6.4.3160.44",
+                        "OPR": "105.0.4970.13",
                         "Safari": "17.0",
                     }
                 )
@@ -32,8 +32,7 @@ class VersionUpdater:
             version = release_list.ol.li.a.text
             self.firefox = version
         except Exception as e:
-            print(e)
-            raise Exception("Error updating firefox")
+            self.firefox = None
 
     def update_chrome(self):
         try:
@@ -45,8 +44,7 @@ class VersionUpdater:
             ]
             self.chrome = version
         except Exception as e:
-            print(e)
-            raise Exception("Error updating chrome")
+            self.chrome = None
 
     def update_safari(self):
         try:
@@ -56,18 +54,16 @@ class VersionUpdater:
             version = info_boxes[2].text[: info_boxes[2].text.find("[")]
             self.safari = version
         except Exception as e:
-            print(e)
-            raise Exception("Error updating safari")
+            self.safari = None
 
     def update_edge(self):
         try:
             url = "https://www.techspot.com/downloads/7158-microsoft-edge.html"
             soup = BeautifulSoup(requests.get(url).text, "html.parser")
-            version = soup.find("span", class_="subver").text
+            version = soup.find("div", class_="subver").text
             self.edge = version
         except Exception as e:
-            print(e)
-            raise Exception("Error updating edge")
+            self.edge = None
 
     def update_vivaldi(self):
         try:
@@ -79,10 +75,9 @@ class VersionUpdater:
             version = text[: text.find(")")]
             self.vivaldi = version
         except Exception as e:
-            print(e)
-            raise Exception("Error updating vivaldi")
+            self.vivaldi = None
 
-    def update_opera(self) -> str:
+    def update_opera(self):
         try:
             url = "https://en.wikipedia.org/wiki/Opera_(web_browser)"
             soup = BeautifulSoup(requests.get(url).text, "html.parser")
@@ -90,8 +85,7 @@ class VersionUpdater:
             version = info_boxes[2].div.text[: info_boxes[2].div.text.find("[")]
             self.opera = version
         except Exception as e:
-            print(e)
-            raise Exception("Error updating Opera")
+            self.opera = None
 
     def update_all(self):
         updaters = [
@@ -102,7 +96,7 @@ class VersionUpdater:
             self.update_vivaldi,
             self.update_opera,
         ]
-        with ThreadPoolExecutor(6) as executor:
+        with ThreadPoolExecutor() as executor:
             for updater in updaters:
                 executor.submit(updater)
         versions = {
@@ -117,7 +111,7 @@ class VersionUpdater:
         poppers = [
             version
             for version in versions
-            if not ((versions[version]).replace(".", "")).isnumeric()
+            if version and not ((versions[version]).replace(".", "")).isnumeric()
         ]
         for popper in poppers:
             versions.pop(popper)
