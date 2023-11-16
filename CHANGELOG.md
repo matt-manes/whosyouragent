@@ -1,5 +1,14 @@
 # Changelog
 
+## v1.3.1 (2023-11-16)
+
+#### Fixes
+
+* fix edge updater and no longer inform user when update fails to avoid confusion
+#### Performance improvements
+
+* add default browser versions
+
 ## v1.3.0 (2023-11-02)
 
 #### New Features
