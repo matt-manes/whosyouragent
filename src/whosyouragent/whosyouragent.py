@@ -117,21 +117,14 @@ class VersionUpdater:
         poppers = [
             version
             for version in versions
-            if version and not ((versions[version]).replace(".", "")).isnumeric()
+            if versions[version]
+            and not ((versions[version]).replace(".", "")).isnumeric()
         ]
         for popper in poppers:
             versions.pop(popper)
         previous_versions = json.loads(self.versions_path.read_text())
         versions = previous_versions | versions
         self.versions_path.write_text(json.dumps(versions))
-
-
-platforms = [
-    "(Windows NT 10.0; Win64; x64)",
-    "(x11; Ubuntu; Linux x86_64)",
-    "(Windows NT 11.0; Win64; x64)",
-    "(Macintosh; Intel Mac OS X 13_0_0)",
-]
 
 
 def randomize_version_number(version: str) -> str:
@@ -150,6 +143,12 @@ def get_agent() -> str:
     :param as_dict: If True, return {"User-Agent": useragent} instead of just the useragent string.
     Note: Leaving this parameter in place to maintain backwards compatibility,
     but it's advised to use the `get_header()` function instead."""
+    platforms = [
+        "(Windows NT 10.0; Win64; x64)",
+        "(x11; Ubuntu; Linux x86_64)",
+        "(Windows NT 11.0; Win64; x64)",
+        "(Macintosh; Intel Mac OS X 13_0_0)",
+    ]
     browsers = json.loads((Path(__file__).parent / "browserVersions.json").read_text())
     for browser in browsers:
         browsers[browser] = randomize_version_number(browsers[browser])
