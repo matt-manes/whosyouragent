@@ -1,5 +1,20 @@
 # Changelog
 
+## v2.0.0 (2024-02-17)
+
+#### Fixes
+
+* fix pulling wrong chrome version
+* check the value not the key when checking for poppers
+#### Refactorings
+
+* BREAKING remove `as_header` arg from 'get_agent()`
+* improve type annotation coverage
+#### Others
+
+* update default browser versions
+
+
 ## v1.3.1 (2023-11-16)
 
 #### Fixes
