@@ -2,7 +2,6 @@ import json
 import random
 from pathlib import Path
 
-
 import whosyouragent
 
 updater = whosyouragent.VersionUpdater()
