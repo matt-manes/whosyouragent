@@ -11,26 +11,32 @@ updater.update_all()
 
 def test__whosyouragent__update_firefox():
     assert all(ch.isnumeric() or ch == "." for ch in updater.firefox)
+    print(updater.firefox)
 
 
 def test__whosyouragent__update_chrome():
     assert all(ch.isnumeric() or ch == "." for ch in updater.chrome)
+    print(updater.chrome)
 
 
 def test__whosyouragent__update_safari():
     assert all(ch.isnumeric() or ch == "." for ch in updater.safari)
+    print(updater.safari)
 
 
 def test__whosyouragent__update_edge():
     assert all(ch.isnumeric() or ch == "." for ch in updater.edge)
+    print(updater.edge)
 
 
 def test__whosyouragent__update_vivaldi():
     assert all(ch.isnumeric() or ch == "." for ch in updater.vivaldi)
+    print(updater.vivaldi)
 
 
 def test__whosyouragent__update_opera():
     assert all(ch.isnumeric() or ch == "." for ch in updater.opera)
+    print(updater.opera)
 
 
 def test__whosyouragent__update_all():
@@ -46,10 +52,12 @@ def test__whosyouragent__update_all():
 
 
 def test__whosyouragent__get_agent():
+    agent = ""
     for _ in range(10000):
         agent = whosyouragent.get_agent()
         assert type(agent) == str
         assert agent.startswith("Mozilla/5.0 ")
+    print(agent)
 
 
 def test__whosyouragent__randomize_version_number():
