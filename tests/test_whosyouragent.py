@@ -2,7 +2,6 @@ import json
 import random
 from pathlib import Path
 
-import pytest
 
 import whosyouragent
 
@@ -72,7 +71,7 @@ def test__whosyouragent__randomize_version_number():
     def get_random_browser() -> str:
         return versions[random.choice(list(versions.keys()))]
 
-    for _ in range(10000):
+    for _ in range(100000):
         original = get_random_browser()
         original_sum = checksum(original)
         new = whosyouragent.whosyouragent.randomize_version_number(original)

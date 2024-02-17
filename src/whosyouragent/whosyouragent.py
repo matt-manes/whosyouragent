@@ -10,6 +10,12 @@ from bs4 import BeautifulSoup
 class VersionUpdater:
     def __init__(self):
         self.versions_path = Path(__file__).parent / "browserVersions.json"
+        self.firefox: str = ""
+        self.chrome: str = ""
+        self.safari: str = ""
+        self.edge: str = ""
+        self.vivaldi: str = ""
+        self.opera: str = ""
         if not self.versions_path.exists():
             self.versions_path.write_text(
                 json.dumps(
@@ -29,10 +35,10 @@ class VersionUpdater:
             url = "https://www.mozilla.org/en-US/firefox/releases/"
             soup = BeautifulSoup(requests.get(url).text, "html.parser")
             release_list = soup.find("ol", class_="c-release-list")
-            version = release_list.ol.li.a.text
+            version = release_list.find("ol").find("li").find("a").text  # type: ignore
             self.firefox = version
         except Exception as e:
-            self.firefox = None
+            pass
 
     def update_chrome(self):
         try:
@@ -44,7 +50,7 @@ class VersionUpdater:
             ]
             self.chrome = version
         except Exception as e:
-            self.chrome = None
+            pass
 
     def update_safari(self):
         try:
@@ -54,28 +60,28 @@ class VersionUpdater:
             version = info_boxes[2].text[: info_boxes[2].text.find("[")]
             self.safari = version
         except Exception as e:
-            self.safari = None
+            pass
 
     def update_edge(self):
         try:
             url = "https://www.techspot.com/downloads/7158-microsoft-edge.html"
             soup = BeautifulSoup(requests.get(url).text, "html.parser")
-            version = soup.find("div", class_="subver").text
+            version = soup.find("div", class_="subver").text  # type: ignore
             self.edge = version
         except Exception as e:
-            self.edge = None
+            pass
 
     def update_vivaldi(self):
         try:
             url = "https://vivaldi.com/blog/"
             soup = BeautifulSoup(requests.get(url).text, "html.parser")
-            text = soup.find("div", class_="download-vivaldi-sidebar").text
+            text = soup.find("div", class_="download-vivaldi-sidebar").text  # type: ignore
             text = text.split(" - ")[1]
             text = text.replace(" (", ".")
             version = text[: text.find(")")]
             self.vivaldi = version
         except Exception as e:
-            self.vivaldi = None
+            pass
 
     def update_opera(self):
         try:
@@ -85,7 +91,7 @@ class VersionUpdater:
             version = info_boxes[2].div.text[: info_boxes[2].div.text.find("[")]
             self.opera = version
         except Exception as e:
-            self.opera = None
+            pass
 
     def update_all(self):
         updaters = [
