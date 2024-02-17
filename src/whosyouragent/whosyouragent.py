@@ -20,12 +20,12 @@ class VersionUpdater:
             self.versions_path.write_text(
                 json.dumps(
                     {
-                        "Firefox": "119.0.1",
+                        "Firefox": "122.0.1",
                         "Chrome": "109.0.5414.165",
-                        "Edg": "119.0.2151.58",
-                        "Vivaldi": "6.4.3160.44",
-                        "OPR": "105.0.4970.13",
-                        "Safari": "17.0",
+                        "Edg": "121.0.2277.128",
+                        "Vivaldi": "6.5.3206.63",
+                        "OPR": "107.0.5045.21",
+                        "Safari": "17.2",
                     }
                 )
             )
