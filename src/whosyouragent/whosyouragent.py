@@ -144,7 +144,7 @@ def randomize_version_number(version: str) -> str:
     return ".".join(str(part) for part in parts)
 
 
-def get_agent(as_dict: bool = False) -> str:
+def get_agent() -> str:
     """Build and return a user agent string.
 
     :param as_dict: If True, return {"User-Agent": useragent} instead of just the useragent string.
@@ -172,10 +172,7 @@ def get_agent(as_dict: bool = False) -> str:
                 useragent += f' OPR/{browsers["OPR"]}'
             elif browser == "Vivaldi":
                 useragent += f' Vivaldi/{browsers["Vivaldi"]}'
-    if as_dict:
-        return {"User-Agent": useragent}
-    else:
-        return useragent
+    return useragent
 
 
 def get_header() -> dict[str, str]:

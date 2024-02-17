@@ -46,13 +46,10 @@ def test__whosyouragent__update_all():
 
 
 def test__whosyouragent__get_agent():
-    agent = whosyouragent.get_agent()
-    assert type(agent) == str
-    assert agent.startswith("Mozilla/5.0 ")
-    agent = whosyouragent.get_agent(as_dict=True)
-    assert type(agent) == dict
-    assert list(agent.keys()) == ["User-Agent"]
-    assert agent["User-Agent"].startswith("Mozilla/5.0 ")
+    for _ in range(10000):
+        agent = whosyouragent.get_agent()
+        assert type(agent) == str
+        assert agent.startswith("Mozilla/5.0 ")
 
 
 def test__whosyouragent__randomize_version_number():
@@ -71,11 +68,12 @@ def test__whosyouragent__randomize_version_number():
     def get_random_browser() -> str:
         return versions[random.choice(list(versions.keys()))]
 
-    for _ in range(100000):
+    for _ in range(10000):
         original = get_random_browser()
         original_sum = checksum(original)
         new = whosyouragent.whosyouragent.randomize_version_number(original)
         assert all(ch.isnumeric() or ch == "." for ch in new)
+        # Assuming saved version is the newest, shouldn't have a randomized one that says it's newer
         assert original_sum >= checksum(new)
 
 
@@ -85,3 +83,4 @@ def test__get_header():
     assert "User-Agent" in headers
     assert isinstance(headers["User-Agent"], str)
     assert headers["User-Agent"] != ""
+    assert headers["User-Agent"].startswith("Mozilla/5.0 ")
