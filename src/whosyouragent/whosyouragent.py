@@ -21,7 +21,7 @@ class VersionUpdater:
                 json.dumps(
                     {
                         "Firefox": "122.0.1",
-                        "Chrome": "109.0.5414.165",
+                        "Chrome": "121.0.6167.184",
                         "Edg": "121.0.2277.128",
                         "Vivaldi": "6.5.3206.63",
                         "OPR": "107.0.5045.21",
@@ -45,9 +45,8 @@ class VersionUpdater:
             url = "https://en.wikipedia.org/wiki/Google_Chrome"
             soup = BeautifulSoup(requests.get(url).text, "html.parser")
             info_boxes = soup.find_all("td", class_="infobox-data")
-            version = info_boxes[8].text[
-                : min([info_boxes[8].text.find("["), info_boxes[8].text.find("/")])
-            ]
+            raw = info_boxes[7].text
+            version = raw[: min([raw.find("["), raw.find("/")])]
             self.chrome = version
         except Exception as e:
             pass
