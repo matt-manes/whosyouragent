@@ -10,12 +10,6 @@ from bs4 import BeautifulSoup
 class VersionUpdater:
     def __init__(self):
         self.versions_path = Path(__file__).parent / "browserVersions.json"
-        self.firefox: str = ""
-        self.chrome: str = ""
-        self.safari: str = ""
-        self.edge: str = ""
-        self.vivaldi: str = ""
-        self.opera: str = ""
         if not self.versions_path.exists():
             self.versions_path.write_text(
                 json.dumps(
@@ -29,6 +23,13 @@ class VersionUpdater:
                     }
                 )
             )
+        versions = json.loads(self.versions_path.read_text())
+        self.firefox: str = versions["Firefox"]
+        self.chrome: str = versions["Chrome"]
+        self.safari: str = versions["Safari"]
+        self.edge: str = versions["Edg"]
+        self.vivaldi: str = versions["Vivaldi"]
+        self.opera: str = versions["OPR"]
 
     def update_firefox(self):
         try:
@@ -63,12 +64,13 @@ class VersionUpdater:
 
     def update_edge(self):
         try:
-            url = "https://www.techspot.com/downloads/7158-microsoft-edge.html"
+            url = "https://learn.microsoft.com/en-us/deployedge/microsoft-edge-relnote-stable-channel"
             soup = BeautifulSoup(requests.get(url).text, "html.parser")
-            version = soup.find("div", class_="subver").text  # type: ignore
+            version = soup.find_all("h2")[1].text  # type: ignore
+            version = version.split(":")[0].removeprefix("Version ")
             self.edge = version
         except Exception as e:
-            pass
+            print(e)
 
     def update_vivaldi(self):
         try:
