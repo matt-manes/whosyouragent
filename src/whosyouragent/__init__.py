@@ -4,7 +4,7 @@ from pathlib import Path
 
 from .whosyouragent import VersionUpdater, get_agent, get_header
 
-__version__ = "2.0.0"
+__version__ = "2.0.1"
 __all__ = ["VersionUpdater", "get_agent", "get_header"]
 
 browsers_path = Path(__file__).parent / "browserVersions.json"

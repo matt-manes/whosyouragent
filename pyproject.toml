@@ -1,7 +1,7 @@
 [project]
 name = "whosyouragent"
 description = "Self updating package for generating random user agent strings."
-version = "2.0.0"
+version = "2.0.1"
 dependencies = ["requests", "bs4", "pytest", "whosyouragent", "beautifulsoup4"]
 readme = "README.md"
 keywords = ["useragent", "user-agent", "webscraping", "web-scraping"]
